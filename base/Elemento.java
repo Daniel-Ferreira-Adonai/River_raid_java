@@ -3,23 +3,31 @@ package br.com.mvbos.lgj.base;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import javax.swing.ImageIcon;
 
 public class Elemento {
+	private int valorPonto = 1;
+
+
 
 	public static AffineTransform afAnterior;
 	protected static final AffineTransform af = new AffineTransform();
 
-	private float px;
-	private float py;
-	private int largura;
-	private int altura;
+	protected float px;
+	protected float py;
+	private int largura = 1000;
+	private int altura = 1000;
 
 	private int vel;
 	private boolean ativo;
 	private Color cor;
 
 	private ImageIcon imagem;
+
+	protected BufferedImage image;
+
+
 
 	public Elemento() {
 	}
@@ -42,6 +50,17 @@ public class Elemento {
 			g.drawImage(imagem.getImage(), (int) px, (int) py, null);
 		}
 	}
+
+	public void desenhaImage(Graphics2D g, BufferedImage image) {
+		this.image = image;
+		if (imagem == null) {
+			g.setColor(cor);
+			g.fillRect((int) px, (int) py, largura, altura);
+		} else {
+			g.drawImage(imagem.getImage(), (int) px, (int) py, null);
+		}
+	}
+
 	public void desenhaLeft(Graphics2D g) {
 		if (imagem == null) {
 			g.setColor(cor);
@@ -137,6 +156,10 @@ public class Elemento {
 
 	public void incPy(int y) {
 		py = py + y;
+	}
+
+	public BufferedImage getImage(){
+		return this.image;
 	}
 
 	@Override

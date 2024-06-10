@@ -1,14 +1,22 @@
 package br.com.mvbos.lgj.base;
 
-import java.awt.Font;
-import java.awt.Graphics2D;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Texto extends Elemento {
 
 	private Font fonte;
 
 	public Texto() {
-		fonte = new Font("Tahoma", Font.PLAIN, 16);
+
+		try {
+			File fontFile = new File(".\\River_raid_av3_ranking_semi\\River_raid_av3_ranking\\Assets\\fibberish.ttf");
+			fonte = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(50f);
+		}
+		catch(IOException | FontFormatException e){
+			e.printStackTrace();
+		}
 	}
 
 	public Texto(Font fonte) {
